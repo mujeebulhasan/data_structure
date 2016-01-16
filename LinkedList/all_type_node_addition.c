@@ -129,6 +129,12 @@ int getCount(struct node *head_ref){
 	return count;
 }
 
+int getCountRecursive(struct node *head_ref){
+	if(head_ref==NULL){
+		return 0;
+	}else return 1+getCountRecursive(head_ref->next);
+}
+
 
 int main(){
 	struct node *head=NULL;
@@ -154,7 +160,10 @@ int main(){
 	deleteNode(&head,2);
 	printList(head);
 	int count = getCount(head);
-	printf("\nNumber of nodes = %d\n",count);
+	printf("\nNumber of nodes using non recursive function = %d\n",count);
+	int count1 = getCountRecursive(head);
+	printf("Number of nodes using recursive function = %d\n",count1);
+	
 	return 0;
 }
 
