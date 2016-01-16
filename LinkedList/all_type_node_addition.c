@@ -119,6 +119,16 @@ void deleteNode(struct node **head_ref,int position){
 	
 }
 
+int getCount(struct node *head_ref){
+	int count=0;
+	struct node *temp=head_ref;
+	while(temp != NULL){
+		temp = temp->next;
+		count++;
+	}
+	return count;
+}
+
 
 int main(){
 	struct node *head=NULL;
@@ -143,6 +153,8 @@ int main(){
 	printf("\nList after deleting node at position 2\n");
 	deleteNode(&head,2);
 	printList(head);
+	int count = getCount(head);
+	printf("\nNumber of nodes = %d\n",count);
 	return 0;
 }
 
