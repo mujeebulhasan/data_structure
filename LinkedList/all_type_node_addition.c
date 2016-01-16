@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
+#include<stdbool.h>
 
 struct node{
 	int data;
@@ -135,6 +136,24 @@ int getCountRecursive(struct node *head_ref){
 	}else return 1+getCountRecursive(head_ref->next);
 }
 
+bool search(struct node *head_ref,int key){
+	struct node *temp=head_ref;
+	while(temp !=NULL){
+		if(temp->data == key){
+			return true;
+		}else{
+			temp = temp->next;
+		}
+	}
+	return false;
+}
+
+bool searchRecursive(struct node *head_ref,int key){
+	if(head_ref == NULL) return false;
+	if(head_ref->data == key) return true;
+	return searchRecursive(head_ref->next,key);
+}
+
 
 int main(){
 	struct node *head=NULL;
@@ -154,16 +173,25 @@ int main(){
 	printf("Created list is :\n");
 	printList(head);
 	delete(&head,45);
-	printf("\nList after deleting node 45\n");
+	printf("\n\nList after deleting node 45\n");
 	printList(head);
-	printf("\nList after deleting node at position 2\n");
+	printf("\n\nList after deleting node at position 2\n");
 	deleteNode(&head,2);
 	printList(head);
 	int count = getCount(head);
-	printf("\nNumber of nodes using non recursive function = %d\n",count);
+	printf("\n\nNumber of nodes using non recursive function = %d\n",count);
 	int count1 = getCountRecursive(head);
-	printf("Number of nodes using recursive function = %d\n",count1);
+	printf("\nNumber of nodes using recursive function = %d\n",count1);
 	
+	
+	printf("\nSearching for the element 70\n");
+	search(head,70)?printf("Found\n"):printf("Not found\n");
+	printf("\nSearching for the element 35\n");
+	search(head,35)?printf("Found\n"):printf("Not found\n\n");
+	printf("\nSearching for the element recursively 70\n");
+	searchRecursive(head,70)?printf("Found\n"):printf("Not found\n");
+	printf("\nSearching for the element recursively 35\n");
+	searchRecursive(head,35)?printf("Found\n"):printf("Not found\n\n");
 	return 0;
 }
 
