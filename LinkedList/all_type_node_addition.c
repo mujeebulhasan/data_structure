@@ -196,6 +196,17 @@ void swapNodes(struct node **head_ref,int x,int y){
 	
 }
 
+void printMiddle(struct node *head_ref){
+	struct node *fastptr = head_ref,*slowptr = head_ref;
+	if(head_ref!=NULL){
+		while(fastptr!=NULL && fastptr->next !=NULL){
+			fastptr = fastptr->next->next;
+			slowptr = slowptr->next;
+		}
+		printf("The middle element is [%d]\n\n", slowptr->data);
+	}
+}
+
 int main(){
 	struct node *head=NULL;
 	
@@ -244,6 +255,8 @@ int main(){
 	printf("\n\nSwap(20,60)\n");
 	swapNodes(&head,20,60);
 	printList(head);
+	printf("Middle of the linked list is:\n");
+	printMiddle(head);
 	
 	return 0;
 }
