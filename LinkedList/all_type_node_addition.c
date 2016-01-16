@@ -154,6 +154,47 @@ bool searchRecursive(struct node *head_ref,int key){
 	return searchRecursive(head_ref->next,key);
 }
 
+void swapNodes(struct node **head_ref,int x,int y){
+	if(x==y) {
+		printf("Nothing to swap.\n");
+		return;
+	}
+	
+	struct node *prevX=NULL,*curX=*head_ref;
+	
+	while(curX && curX->data != x){
+		prevX=curX;
+		curX = curX->next;
+	}
+	
+	struct node *prevY=NULL,*curY=*head_ref;
+	
+	while(curY && curY->data != y){
+		prevY=curY;
+		curY = curY->next;
+	}
+	
+	if (curX == NULL || curY == NULL){
+       printf("One of the node is not present in the list.\n");
+	   return;
+	}
+	
+	if(prevX != NULL){
+		prevX->next = curY;
+	}else{
+		*head_ref = curY;
+	}
+	
+	if(prevY != NULL){
+		prevY->next = curX;
+	}else{
+		*head_ref = curX;
+	}
+	struct node *temp = curY->next;
+	curY->next = curX->next;
+	curX->next = temp;
+	
+}
 
 int main(){
 	struct node *head=NULL;
@@ -178,6 +219,10 @@ int main(){
 	printf("\n\nList after deleting node at position 2\n");
 	deleteNode(&head,2);
 	printList(head);
+	/*
+	Now linked list is 
+	10 20 40 50 60 70 
+	*/
 	int count = getCount(head);
 	printf("\n\nNumber of nodes using non recursive function = %d\n",count);
 	int count1 = getCountRecursive(head);
@@ -191,7 +236,15 @@ int main(){
 	printf("\nSearching for the element recursively 70\n");
 	searchRecursive(head,70)?printf("Found\n"):printf("Not found\n");
 	printf("\nSearching for the element recursively 35\n");
-	searchRecursive(head,35)?printf("Found\n"):printf("Not found\n\n");
+	searchRecursive(head,35)?printf("Found\n"):printf("Not found\n");
+	
+	printf("\nSwap nodes in a linked list without swapping data.\n");
+	printf("Linked list is :\n");
+	printList(head);
+	printf("\n\nSwap(20,60)\n");
+	swapNodes(&head,20,60);
+	printList(head);
+	
 	return 0;
 }
 
