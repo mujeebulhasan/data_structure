@@ -207,6 +207,42 @@ void printMiddle(struct node *head_ref){
 	}
 }
 
+void printNthFromLast(struct node *head_ref,int n){
+	//two pointer method O(n)
+	struct node *refptr = head_ref;
+	struct node *mainptr = head_ref;
+	int count =0;
+	if(head_ref!=NULL){
+		while(count<n){
+			if(refptr == NULL)
+			{
+				printf("%d is greater than the no. of nodes in list", n);
+				return;
+			}
+			refptr = refptr->next;
+			count++;
+		}
+		while(refptr!=NULL){
+			mainptr = mainptr->next;
+			refptr = refptr->next;
+		}
+		printf("Node no. %d from last is %d ", n, mainptr->data);
+	}
+}
+
+void reverseList(struct node **head_ref){
+	struct node *prev = NULL;
+	struct node *current = *head_ref;
+	struct node *next;
+	while(current != NULL){
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current =next;
+	}
+	*head_ref = prev;
+}
+
 int main(){
 	struct node *head=NULL;
 	
@@ -257,6 +293,15 @@ int main(){
 	printList(head);
 	printf("Middle of the linked list is:\n");
 	printMiddle(head);
+	
+	printf("\nNth (N=3) element from last is :\n");
+	printNthFromLast(head,3);
+	
+	printf("\n\nLinked list is :\n");
+	printList(head);
+	printf("\nReverse list is :\n");
+	reverseList(&head);
+	printList(head);
 	
 	return 0;
 }
