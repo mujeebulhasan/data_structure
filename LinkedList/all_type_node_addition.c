@@ -254,10 +254,12 @@ int main(){
 	push(&head,20);
 	push(&head,10);
 	insertAfter(&head,45,40);
+	
 	/*
 	Now linked list is 
 	10 20 30 40 45 50 60 70 
 	*/
+	
 	printf("Created list is :\n");
 	printList(head);
 	delete(&head,45);
