@@ -3,6 +3,8 @@
 #include<conio.h>
 #include<stdbool.h>
 
+/* to reverse a liked lst */
+
 struct node{
 	int data;
 	struct node *next;
@@ -35,6 +37,7 @@ struct node* reverseList(struct node *head){
 
 void reverseListRecursive(struct node *head){
 	
+	if()
 	
 }
 
